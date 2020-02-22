@@ -1,0 +1,62 @@
+<h1 style="text-align: center" mat-dialog-title>Cập nhập người dùng</h1>
+<div mat-dialog-content>
+  <div class="row">
+    <div class="col-12">
+      <mat-form-field>
+        <input matInput placeholder="Tên sinh viên" [(ngModel)]='data.name'>
+      </mat-form-field>
+    </div>
+    <div class="col-12">
+      <mat-form-field>
+        <input matInput placeholder="Email" type="email" [(ngModel)]='data.email'>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field>
+        <input matInput placeholder="Số điện thoại" [(ngModel)]='data.phone'>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field>
+        <input matInput placeholder="Mã Sinh viên" [(ngModel)]='data.studentId'>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Ngày sinh" [(ngModel)]='data.birthDate'>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+
+      <mat-radio-group [(ngModel)]="data.role">
+        <div class="row mt-2">
+          <div class="col-6 text-left">
+            <mat-radio-button color=warn value="admin">Admin </mat-radio-button>
+          </div>
+          <div class="col-6 text-right">
+            <mat-radio-button color=primary value="judge">Judge</mat-radio-button>
+          </div>
+        </div>
+
+
+      </mat-radio-group>
+
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <div style="width: 100% " class="btns">
+    <div class="float-right">
+      <button style="background-color: #7bc043;color: white" mat-button [mat-dialog-close]="data" cdkFocusInitial>Cập nhập</button>
+    </div>
+    <div class="float-left">
+      <button style="background-color: #f26b38;color: white" mat-button (click)="onNoClick()">Đóng</button>
+    </div>
+  </div>
+
+
+
+</div>

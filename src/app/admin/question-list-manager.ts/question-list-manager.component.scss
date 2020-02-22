@@ -1,0 +1,9 @@
+.example-container {
+  position: relative;
+  height: 100%;
+  .table-container {
+    height: calc(100% - 56px);
+    overflow: auto;
+    background-color: white;
+  }
+}

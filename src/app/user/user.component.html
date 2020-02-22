@@ -1,0 +1,43 @@
+<div class="wrapper">
+  <mat-toolbar class="header-toolbar">
+    <div style="width: 100%" class="row">
+      <div class="col-md-6">
+        <!-- <button mat-icon-button type="button" (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button> -->
+        <h1 style="display: inline-block;" class="">HIT Club Competitive</h1>
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="header-btn" mat-icon-button [matMenuTriggerFor]="menu">
+          <img class="logo-img mt-0" mat-card-image src="../../assets//images/logo-hit.png" alt="avatar">
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>account_circle</mat-icon>Thông tin tài khoản</button>
+          <button (click)="logOut()" mat-menu-item>
+            <mat-icon>power_settings_new
+            </mat-icon>Đăng xuát</button>
+        </mat-menu>
+
+      </div>
+    </div>
+  </mat-toolbar>
+  <div class="view-container">
+    <div *ngIf="this.startBtnClicked === false" class="view ">
+      <div class="row justify-content-center">
+        <mat-card class="mt-5 col-xl-7 col-lg-10 col-md-10 col-10 text-center">
+          <h3>Chào mừng bạn đến với cuộc thi tuyển thành viên của CLB HIT</h3>
+          <button class="my-5" mat-stroked-button color=warn (click)="startTest()" routerLink="/user/competitive" mat-button>Bắt đầu bài thi</button>
+          <!-- <button class="my-5" mat-stroked-button color=warn (click)="startTest()"\ mat-button>Bắt đầu bài thi</button> -->
+        </mat-card>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+  <mat-toolbar class="footer-toolbar">
+    <div style="width: 100%; color: white" class="footer-content">
+      <p class="mb-0 text-center">Powered by Do Thang & Nguyen Thanh Trung
+      </p>
+    </div>
+  </mat-toolbar>

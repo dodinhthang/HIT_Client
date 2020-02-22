@@ -1,0 +1,60 @@
+<div class="example-container ">
+  <div class="table-container">
+    <table style="width: 100%;" mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="position">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 50px"> STT </th>
+        <td class="tdh" mat-cell *matCellDef="let element;let i = index" [style.color]="checkLock(element)">{{i+1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 16%;"> Họ Tên </th>
+        <td class="tdh" mat-cell *matCellDef="let element" [style.color]="checkLock(element)"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="studentId">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 14%;"> Mã sinh viên </th>
+        <td class="tdh" mat-cell *matCellDef="let element" [style.color]="checkLock(element)"> {{element.studentId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="birthDate">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 14%;"> Ngày sinh </th>
+        <td class="tdh" mat-cell *matCellDef="let element" [style.color]="checkLock(element)"> {{element.birthDate| date:'dd/MM/yyy'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 14%;"> Số điện thoại </th>
+        <td class="tdh" mat-cell *matCellDef="let element" [style.color]="checkLock(element)"> {{element.phone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="online">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 14%;"> Online </th>
+        <td class="tdh" mat-cell *matCellDef="let element" [style.color]="checkLock(element)"> {{element.isOnline==true?'Online':'Offline'}} </td>
+      </ng-container>
+      <ng-container cdkColumnDef="action">
+        <th class="thhead" mat-header-cell *matHeaderCellDef>
+          Action
+        </th>
+
+        <td style="width: 200px" mat-cell *matCellDef="let element">
+          <button class="mx-1 action" mat-icon-button (click)="Update(element.studentId);">
+            <mat-icon style="color: #3b7dd8">edit</mat-icon>
+          </button>
+          <button class="mx-1 action" mat-icon-button (click)="Open(element.studentId,'lock');">
+            <mat-icon style="color: #f37735 ">{{element.isLocked==true?'lock_open':'lock'}}</mat-icon>
+          </button>
+          <button class="mx-1 action" mat-icon-button (click)="Open(element.studentId,'delete');">
+            <mat-icon style="color: #ee4035 ">delete</mat-icon>
+          </button>
+        </td>
+
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr [style.background-color]="getRowStyle(element)" mat-row *matRowDef="let row; columns: displayedColumns;let element"></tr>
+    </table>
+    <!-- element.role=='admin'?{background-color:'green'}:{} -->
+  </div>
+  <div>
+    <mat-paginator [pageSizeOptions]="[ 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

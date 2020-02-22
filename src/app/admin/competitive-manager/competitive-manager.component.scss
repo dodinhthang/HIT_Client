@@ -1,0 +1,18 @@
+.example-container {
+  position: relative;
+  height: 100%;
+  .table-container {
+    height: calc(100% - 56px);
+    overflow: auto;
+    background-color: white;
+  }
+  .tool-box {
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    .btn {
+      display: inline-block;
+    }
+  }
+}

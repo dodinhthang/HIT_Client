@@ -1,0 +1,90 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+mat-card {
+  height: auto;
+}
+mat-form-field {
+  width: 100%;
+}
+.login {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+}
+.mat-raised-button {
+  background-color: orangered;
+  background-color: orangered;
+  color: white;
+}
+.signup {
+  margin: 20px;
+}
+.topform {
+  // box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  text-align: center;
+  background-image: linear-gradient(45deg, #667eea 0%, #764ba2 99%, #fad0c4 100%);
+  position: absolute;
+  height: auto;
+  margin: 0 auto;
+  width: calc(100% - 48px);
+  top: -50px;
+  /* height: 60px; */
+  font-family: 'Tahoma', Tahoma, Geneva, Verdana, sans-serif;
+}
+.middle {
+  height: auto;
+  // position: absolute;
+  // left: 50%;
+  // top: 50%;
+  // transform: translateX(-50%) translateY(-50%);
+  // -webkit-transform: translateX(-50%) translateY(-50%);
+}
+.view {
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+}
+.container {
+  height: 100%;
+  width: 100%;
+}
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: rgba(231, 56, 39, 1);
+  background: -moz-linear-gradient(bottom, rgba(231, 56, 39, 1) 0%, rgba(231, 56, 39, 1) 27%, rgba(255, 166, 0, 1) 100%);
+  background: -webkit-gradient(
+    left bottom,
+    left bottom,
+    color-stop(0%, rgba(231, 56, 39, 1)),
+    color-stop(27%, rgba(231, 56, 39, 1)),
+    color-stop(100%, rgba(255, 166, 0, 1))
+  );
+  background: -webkit-linear-gradient(bottom, rgba(231, 56, 39, 1) 0%, rgba(231, 56, 39, 1) 27%, rgba(255, 166, 0, 1) 100%);
+  background: -o-linear-gradient(bottom, rgba(231, 56, 39, 1) 0%, rgba(231, 56, 39, 1) 27%, rgba(255, 166, 0, 1) 100%);
+  background: -ms-linear-gradient(bottom, rgba(231, 56, 39, 1) 0%, rgba(231, 56, 39, 1) 27%, rgba(255, 166, 0, 1) 100%);
+  background: linear-gradient(to top, rgba(231, 56, 39, 1) 0%, rgba(231, 56, 39, 1) 27%, rgba(255, 166, 0, 1) 100%);
+  .about {
+    position: fixed;
+    bottom: 0;
+    padding: 2rem;
+    width: 100%;
+    z-index: 10;
+    color: white;
+  }
+}

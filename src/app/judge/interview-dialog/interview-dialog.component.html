@@ -1,0 +1,46 @@
+<div class="dialog-container">
+
+  <h2 mat-dialog-title>{{this.data.studentName}}</h2>
+
+  <mat-dialog-content class="mat-typography editor" id="style-11">
+    <div class="dialog-content">
+      <div class="row">
+        <mat-form-field class="col-md-6">
+          <input (ngModelChange)="changeJudgeName($event)" matInput placeholder="Người phỏng vấn" [formControl]="judgeName" required>
+          <mat-error *ngIf="judgeName.invalid">Bạn phải điền tên người phỏng vấn</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="offset-3 col-2" style="color: red">
+          <mat-label>Điểm phỏng vấn</mat-label>
+          <input max="100" min="0" (ngModelChange)="changeScore($event)" type="number" matInput placeholder="Điểm " [formControl]="score"
+            required>
+          <mat-error *ngIf="score.invalid">Bạn phải nhập điểm phỏng vấn</mat-error>
+          <mat-hint>
+            Điểm từ 0 đến 100
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="mt-2">
+
+        <angular-editor [(ngModel)]="data.content" [config]="config"></angular-editor>
+      </div>
+    </div>
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div style="width: 100%;">
+      <div class="f-left">
+        <button style="background-color:  #ee4035" class="interview-btn" mat-fab [mat-dialog-close]="0">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="f-right">
+        <button style="background-color: #7bc043" class="interview-btn " mat-fab [mat-dialog-close]="1">
+          <mat-icon>check</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-dialog-actions>
+
+</div>

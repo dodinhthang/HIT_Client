@@ -1,0 +1,67 @@
+<div class="example-container mat-elevation-z8">
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="position">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width:50px"> STT </th>
+        <td class="tdh" mat-cell *matCellDef="let element;let i = index">{{i+1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 25%;"> Nội dung </th>
+        <td class="tdh" mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="usingQuestion">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 14%;">Số câu sử dụng </th>
+        <td class="tdh" mat-cell *matCellDef="let element" >
+          {{element.usingQuestion}} </td>
+      </ng-container>
+      <ng-container matColumnDef="questions">
+        <th class="thhead" mat-header-cell *matHeaderCellDef>Tổng số câu </th>
+        <td class="tdh" mat-cell *matCellDef="let element" >
+          {{countQuestion(element.questions)}}</td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="action">
+        <th class="thhead" mat-header-cell *matHeaderCellDef>
+          Action
+        </th>
+        <td class="tdh" style="width: 200px" mat-cell *matCellDef="let element">
+          <!-- <button mat-mini-fab (click)="Update(element._id);">
+            <mat-icon style="color: white">edit</mat-icon>
+          </button>
+
+          <button mat-mini-fab (click)="Open(element._id,'delete');">
+            <mat-icon style="color: white">delete</mat-icon>
+          </button> -->
+          <button class="mx-1 action" mat-icon-button (click)="Update(element._id)">
+            <mat-icon style="color: #3b7dd8">edit</mat-icon>
+          </button>
+
+          <button class="mx-1 action" mat-icon-button (click)="Open(element._id,'delete')">
+            <mat-icon style="color: #ee4035 ">delete</mat-icon>
+          </button>
+        </td>
+
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr [style.background-color]="getRowStyle(element)" mat-row *matRowDef="let row; columns: displayedColumns;let element"></tr>
+    </table>
+    <!-- element.role=='admin'?{background-color:'green'}:{} -->
+  </div>
+  <div class="tool-box">
+    <div class="btn">
+      <button class="mx-1 action" mat-mini-fab style="background-color: #f37735" (click)='Add()'>
+        <mat-icon style="color: white">add</mat-icon>
+      </button>
+
+    </div>
+
+      <mat-paginator [pageSize]='10' [pageSizeOptions]="[5, 10, 20]" [length]="data.total" [pageIndex]='0' (page)="GetIndexPage($event)"
+      showFirstLastButtons></mat-paginator>
+  </div>
+
+
+</div>
+<!-- element.role=='admin'?{background-color:'green'}:{} -->

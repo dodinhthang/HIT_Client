@@ -1,0 +1,49 @@
+.wrapper {
+  height: 100%;
+  .header-toolbar {
+    color: white;
+    background-color: #f26b38;
+    button {
+      background-color: #f26b38;
+      margin-right: 1rem;
+    }
+    .header-btn {
+      .logo-img {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
+  .view-container {
+    height: calc(100% - 64px - 64px);
+    padding: 1rem;
+    .example-container {
+      position: relative;
+      height: 100%;
+      .table-container {
+        height: calc(100% - 56px);
+        overflow: auto;
+        background-color: white;
+      }
+      .tool-box {
+        background-color: white;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        .btn {
+          display: inline-block;
+        }
+      }
+    }
+    .example-sidenav-content {
+      background-color: #eeeeee;
+
+      padding: 1rem;
+      height: 100%;
+    }
+  }
+  .footer-toolbar {
+    background-color: #f26b38;
+  }
+}

@@ -1,0 +1,222 @@
+.wrapper {
+  height: 100%;
+  padding: 1rem;
+  background-color: #f4f4f8;
+  position: relative;
+  .finised {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+  }
+}
+#scollbar {
+  overflow: auto;
+  // height: 85vh;
+  height: 100%;
+  overflow-x: hidden;
+  /* overflow-y: hidden; */
+}
+
+// #scollbar::-webkit-scrollbar {
+//   display: none;
+// }
+// .scollb {
+//   overflow: scroll;
+//   height: 428px;
+//   overflow-x: hidden;
+// }
+.questionnav {
+  color: white;
+  width: 100%;
+  margin: 5px 0;
+}
+
+div.mat-card-header-text {
+  margin: 0 !important;
+}
+
+.ans {
+  color: white;
+  width: 100%;
+
+  margin: 1rem 0;
+
+  min-height: 64px;
+  max-height: 96px;
+  line-height: 1.5;
+  white-space: normal;
+}
+/* HeroesComponent's private CSS styles */
+.selected {
+  background-color: #f26b38 !important;
+  color: white;
+}
+.heroes {
+  // margin: 0 0 2em 0;
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  li {
+    text-overflow: ellipsis;
+  }
+  // width: 95%;
+}
+.heroes li {
+  cursor: pointer;
+  position: relative;
+
+  background-color: white;
+  margin: 0.5rem 0;
+
+  border-radius: 2px;
+  width: 100%;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14) !important;
+}
+.heroes li.selected:hover {
+  background-color: #cccccc !important;
+  color: white;
+}
+.heroes li:hover {
+  color: white !important;
+  background-color: #cccccc !important;
+  left: 0.1em;
+}
+.heroes .text {
+  // position: relative;
+  // top: -3px;
+}
+.heroes .badge {
+  font-size: small;
+  color: white;
+  padding: 0.5rem 0;
+  background-color: #cccccc;
+
+  height: 100%;
+  margin-right: 0.8em;
+  border-radius: 2px 0 0 2px;
+  width: 10%;
+}
+.heroes {
+  li {
+    .item-content {
+      white-space: nowrap;
+      overflow: hidden;
+      width: 85%;
+      display: inline-block;
+      text-overflow: ellipsis;
+      height: 100%;
+      vertical-align: middle;
+    }
+  }
+}
+.test-view {
+  .timer-container {
+    // text-align: center;
+    height: 56px;
+    .timer {
+      position: relative;
+      width: 80%;
+      border: 2px solid #ee4035;
+      border-radius: 4px;
+      .time-content {
+        font-weight: 700;
+        margin-top: -1.5rem;
+        margin-left: 0.5rem;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 24px;
+        height: 100%;
+        width: auto;
+        // margin-bottom: 0;
+      }
+      .mat-icon {
+        height: auto;
+        width: auto;
+      }
+      .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 48px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        /* -webkit-font-feature-settings: 'liga'; */
+        -webkit-font-smoothing: antialiased;
+      }
+    }
+  }
+}
+.upload-btn {
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    /* -webkit-font-feature-settings: 'liga'; */
+    -webkit-font-smoothing: antialiased;
+  }
+}
+.content {
+  max-height: 250px;
+  overflow: auto;
+  p {
+    font-size: 18px;
+  }
+  .example {
+    width: 100%;
+
+    .table {
+      width: 100%;
+      table {
+        width: 100%;
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+    }
+  }
+}
+
+/* Absolute Center Spinner */
+.loading-indicator {
+
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.loading {
+  content: 'Đang xử lý';
+  // display: block;
+  // position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
+}

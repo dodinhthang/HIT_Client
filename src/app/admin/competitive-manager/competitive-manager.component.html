@@ -1,0 +1,80 @@
+<div class="example-container mat-elevation-z8">
+  <div class="table-container">
+    <table style="width: 100%;" mat-table matSort (matSortChange)="sortData($event)" [dataSource]="dataSource">
+
+      <ng-container matColumnDef="position">
+        <th style="width: 50px!important" class="stt" mat-header-cell *matHeaderCellDef> STT </th>
+        <td class="tdh" mat-cell *matCellDef="let element;let i = index" [style.color]="checkLock(element)">{{i+1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th class="thhead" mat-header-cell *matHeaderCellDef> Họ Tên </th>
+        <td class="tdh" mat-cell *matCellDef="let element" [style.color]="checkLock(element)"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="studentId">
+        <th class="thhead" mat-header-cell *matHeaderCellDef> Mã sinh viên </th>
+        <td class="tdh" mat-cell *matCellDef="let element" [style.color]="checkLock(element)"> {{element.studentId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="birthDate">
+        <th style="width: 100px" class="thhead" mat-sort-header="testScore" mat-header-cell *matHeaderCellDef> Điểm thi </th>
+        <td style="width: 100px" class="tdh" mat-cell *matCellDef="let element" [style.color]="checkLock(element)">
+          {{element.playId?element.playId.totalScore:0}} </td>
+      </ng-container>
+      <ng-container matColumnDef="interviewScore">
+        <th class="thhead" style="width: 100px" mat-sort-header="inverviewScore" mat-header-cell *matHeaderCellDef> Điểm phỏng vấn </th>
+        <td class="tdh" style="width: 100px" mat-cell *matCellDef="let element" [style.color]="checkLock(element)">
+          {{element.playId?element.playId.interviewScore:0}} </td>
+      </ng-container>
+      <ng-container matColumnDef="avgScore">
+        <th class="thhead" style="width: 100px" mat-sort-header="avgScore" mat-header-cell *matHeaderCellDef> Điểm trung bình </th>
+        <td class="tdh" style="width: 100px" mat-cell *matCellDef="let element" [style.color]="checkLock(element)">
+          {{element.playId?getAvgScore(element.playId):0}} </td>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <th class="thhead" mat-sort-header="status" mat-header-cell *matHeaderCellDef> Tình trạng </th>
+        <td class="tdh" mat-cell *matCellDef="let element" [style.color]="checkLock(element)"> {{element.playId?CheckEx(element.playId):'Chưa thi'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="online">
+        <th class="thhead" mat-header-cell *matHeaderCellDef> Online </th>
+        <td class="tdh" mat-cell *matCellDef="let element" [style.color]="checkLock(element)"> {{element.isOnline==true?'Online':'Offline'}} </td>
+      </ng-container>
+      <ng-container cdkColumnDef="action">
+        <th class="thhead" mat-header-cell *matHeaderCellDef>
+
+        </th>
+        <td style="width: 200px" mat-cell *matCellDef="let element">
+          <button class="mx-1 action" mat-icon-button (click)="Update(element.studentId);">
+            <mat-icon style="color: #3b7dd8">edit</mat-icon>
+          </button>
+          <button class="mx-1 action" mat-icon-button (click)="Open(element.studentId,'lock');">
+            <mat-icon style="color: #f37735 ">{{element.isLocked==true?'lock_open':'lock'}}</mat-icon>
+          </button>
+          <button class="mx-1 action" mat-icon-button (click)="Open(element.studentId,'delete');">
+            <mat-icon style="color: #ee4035 ">delete</mat-icon>
+          </button>
+        </td>
+
+      </ng-container>
+      <tr class="table-header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr [style.background-color]="getRowStyle(element)" mat-row *matRowDef="let row; columns: displayedColumns;let element"></tr>
+
+    </table>
+  </div>
+
+  <div class="tool-box">
+    <mat-divider></mat-divider>
+    <div class="btn">
+      <button matTooltip="Cập nhật dữ liệu" matTooltipPosition="right" class="mx-1 action" mat-icon-button (click)="SetData(1, 10)">
+        <mat-icon style="color: #f37735 ">autorenew</mat-icon>
+      </button>
+
+    </div>
+
+    <mat-paginator style=" float: right;" [pageSize]='10' [pageSizeOptions]="[5, 10, 20]" [length]="data.total" [pageIndex]='0'
+      showFirstLastButtons></mat-paginator>
+  </div>
+  <!-- element.role=='admin'?{background-color:'green'}:{} -->
+</div>

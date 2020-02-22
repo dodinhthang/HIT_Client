@@ -1,0 +1,118 @@
+<div class="wrapper">
+  <mat-toolbar class="header-toolbar">
+    <div style="width: 100%" class="row">
+      <div class="col-md-6">
+        <!-- <button mat-icon-button type="button" (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button> -->
+        <h1 style="display: inline-block;" class="">HIT Club Interview</h1>
+      </div>
+      <div class="col-md-6 text-right">
+        <button class="header-btn" mat-icon-button [matMenuTriggerFor]="menu">
+          <img class="logo-img mt-0" mat-card-image src="../../assets//images/logo-hit.png" alt="avatar">
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>account_circle</mat-icon>Thông tin tài khoản</button>
+          <button (click)="logOut()" mat-menu-item>
+            <mat-icon>power_settings_new
+            </mat-icon>Đăng xuát</button>
+        </mat-menu>
+
+      </div>
+    </div>
+  </mat-toolbar>
+  <div class="view-container">
+    <div class="example-container mat-elevation-z8">
+      <div class="table-container">
+        <table style="width: 100%;" mat-table matSort (matSortChange)="sortData($event)" [dataSource]="dataSource">
+
+          <ng-container matColumnDef="position">
+            <th style="width: 50px!important" class="stt" mat-header-cell *matHeaderCellDef> STT </th>
+            <td class="tdh" mat-cell *matCellDef="let element;let i = index" [style.color]="element.role=='admin'?'white':''">{{i+1}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th class="thhead" mat-header-cell *matHeaderCellDef> Họ Tên </th>
+            <td class="tdh" mat-cell *matCellDef="let element" [style.color]="element.role=='admin'?'white':''"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="studentId">
+            <th class="thhead" mat-header-cell *matHeaderCellDef> Mã sinh viên </th>
+            <td class="tdh" mat-cell *matCellDef="let element" [style.color]="element.role=='admin'?'white':''"> {{element.studentId}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="birthDate">
+            <th style="width: 100px" class="thhead" mat-sort-header="testScore" mat-header-cell *matHeaderCellDef> Điểm thi </th>
+            <td style="width: 100px" class="tdh" mat-cell *matCellDef="let element" [style.color]="element.role=='admin'?'white':''">
+              {{element.playId?element.playId.totalScore:0}} </td>
+          </ng-container>
+          <ng-container matColumnDef="interviewScore">
+            <th class="thhead" style="width: 100px" mat-sort-header="interviewScore" mat-header-cell *matHeaderCellDef> Điểm phỏng vấn </th>
+            <td class="tdh" style="width: 100px" mat-cell *matCellDef="let element" [style.color]="element.role=='admin'?'white':''">
+              {{element.playId?element.playId.interviewScore:0}} </td>
+          </ng-container>
+          <ng-container matColumnDef="avgScore">
+            <th class="thhead" style="width: 100px" mat-sort-header="avgScore" mat-header-cell *matHeaderCellDef> Điểm trung bình </th>
+            <td class="tdh" style="width: 100px" mat-cell *matCellDef="let element" [style.color]="element.role=='admin'?'white':''">
+              {{element.playId?getAvgScore(element.playId):0}} </td>
+          </ng-container>
+          <ng-container matColumnDef="phone">
+            <th class="thhead" mat-sort-header="status" mat-header-cell *matHeaderCellDef> Tình trạng </th>
+            <td class="tdh" mat-cell *matCellDef="let element" [style.color]="getInterviewBtnStyle(element)"> {{getStatusText(element)}} </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="online">
+            <th class="thhead" mat-header-cell *matHeaderCellDef> Online </th>
+            <td class="tdh" mat-cell *matCellDef="let element" [style.color]="element.role=='admin'?'white':''"> {{element.isOnline==true?'Online':'Offline'}} </td>
+          </ng-container> -->
+          <ng-container cdkColumnDef="action">
+            <th class="thhead" mat-header-cell *matHeaderCellDef>
+
+            </th>
+            <td style="width: 200px" mat-cell *matCellDef="let element">
+              <button *ngIf="this.canInterview(element)" class="mx-1" mat-icon-button (click)="showInterviewDialog(element)">
+                <mat-icon style="color: #7bc043">record_voice_over</mat-icon>
+              </button>
+              <!-- <button class="mx-1 action" mat-icon-button (click)="Update(element.studentId);">
+                <mat-icon style="color: #3b7dd8">edit</mat-icon>
+              </button>
+              <button class="mx-1 action" mat-icon-button (click)="Open(element.studentId,'lock');">
+                <mat-icon style="color: #f37735 ">{{element.isLocked==true?'lock_open':'lock'}}</mat-icon>
+              </button>
+              <button class="mx-1 action" mat-icon-button (click)="Open(element.studentId,'delete');">
+                <mat-icon style="color: #ee4035 ">delete</mat-icon>
+              </button> -->
+            </td>
+
+          </ng-container>
+          <tr class="table-header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr [style.background-color]="getRowStyle(element)" mat-row *matRowDef="let row; columns: displayedColumns;let element"></tr>
+
+        </table>
+      </div>
+
+      <div class="tool-box">
+        <mat-divider></mat-divider>
+        <div class="btn">
+          <button matTooltip="Cập nhật dữ liệu" matTooltipPosition="right" class="mx-1 action" mat-icon-button (click)="SetData(1, 10)">
+            <mat-icon style="color: #f37735 ">autorenew</mat-icon>
+          </button>
+
+        </div>
+
+        <mat-paginator style="display: inline-block; float: right;" [pageSize]='10' [pageSizeOptions]="[5, 10, 20]" [length]="data.total"
+          [pageIndex]='0' showFirstLastButtons></mat-paginator>
+      </div>
+      <!-- element.role=='admin'?{background-color:'green'}:{} -->
+    </div>
+  </div>
+  <mat-toolbar class="footer-toolbar">
+    <div style="width: 100%; color: white" class="footer-content">
+      <div style="width: 100%; color: white" class="footer-content">
+        <p class="mb-0 text-center">Powered by Do Thang & Nguyen Thanh Trung
+        </p>
+      </div>
+    </div>
+  </mat-toolbar>
+</div>

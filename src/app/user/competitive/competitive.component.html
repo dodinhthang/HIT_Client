@@ -1,0 +1,190 @@
+
+<div class="wrapper" [ngClass]="{'loading':loading === true}">
+    <div class="loading-indicator">
+        <!-- <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner> -->
+        <mat-progress-spinner mode="indeterminate" color="accent"  *ngIf = 'loading'></mat-progress-spinner>
+      </div>
+  <div *ngIf="status === false" class="mt-5 row justify-content-center">
+    <mat-card class="col-xl-7 col-lg-10 col-md-10 col-10 text-center">
+      <h3>Bạn đã hoàn thành xong phần thi của mình. Cảm ơn bạn đã tham gia thi tuyển thành viên của câu lạc bộ Tin học HIT</h3>
+    </mat-card>
+  </div>
+  <div style="height: 100%;" class="row" *ngIf="status === true">
+    <div id="scollbar" class="col-3 col-lg-4 col-sm-5 col-xl-3">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Trắc nghiệm
+            </mat-panel-title>
+            <mat-panel-description>
+              Bài kiểm tra EQ,IQ
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <!-- <button *ngFor="let quest of listQ ; let i = index"  [class.selected]="quest === selectedHero" style="text-align: left" class="questionnav" mat-raised-button color="warn"><span style="font-weight: bold">{{i+1}}</span>  {{ quest.questionId.content|slice:0:30}}</button> -->
+          <ul class="heroes">
+            <li *ngFor="let quest of listQ;let i = index" [class.selected]="quest === selectedQuestion" [style.background-color]="quest.answered?'#7bc043':''"
+              [style.color]="quest.answered?'white':''" (click)="onSelect(quest,i)">
+              <span class="badge">{{i+1}}</span>
+              <span class="item-content"> {{quest.questionId.content}}</span>
+            </li>
+          </ul>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Lập trình
+            </mat-panel-title>
+            <mat-panel-description>
+              Lập trình căn bản
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <ul class="heroes">
+            <li *ngFor="let pro of listP;let i = index" [class.selected]="pro === selectedProblem" [style.background-color]="pro.correct?'#7bc043':''"
+              [style.color]="pro.correct?'white':''" (click)="onSelectProblem(pro,i)">
+              <span class="badge">{{i+1}}</span>
+              <span class="item-content">{{pro.problemId.title}}</span>
+            </li>
+          </ul>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-7 col-lg-9 col-xl-9 test-view">
+      <mat-card style="height: 100%;">
+        <div class="timer-container row justify-content-center">
+          <div class="col-4 col-xl-4">
+            <button [disabled]="setButton()===1" (click)="Last();" mat-raised-button color="warn">Trước</button>
+          </div>
+          <div class="timer col-md-3 px-0 col-lg-3 col-xl-3  text-center">
+            <mat-icon [style.color]="timeDis.minute >= 1?'':'#ee4035'">alarm</mat-icon>
+            <div class="time-content" [style.color]="timeDis.minute >= 1?'':'#ee4035'">{{timeDis.minute }} : {{timeDis.seconds }}</div>
+          </div>
+          <div class="col-4 col-xl-4 text-right">
+            <button [disabled]="setButton()===2" (click)="Next();" mat-raised-button color="warn">Sau</button>
+          </div>
+          <!-- <mat-card style="text-align: center;background-color: orangered;color: white;font-weight: bold">
+            <h2>{{timeDis.minute }} : {{timeDis.seconds }} </h2>
+          </mat-card> -->
+        </div>
+        <div *ngIf="selectedQuestion">
+          <mat-card class="my-2 p-2" style="margin-bottom: 2rem; height: 128px; vertical-align: middle;">
+            <p class="text-center mb-2">{{selectedQuestion.questionId.content}}</p>
+          </mat-card>
+
+
+
+          <div class="row">
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <button class="ans" mat-raised-button color="warn" [style.background-color]="selectedQuestion.questionId.options[0].answer==selectedQuestion.answer?'rgb(123, 192, 67)':''"
+                (click)="SelectAns($event);">
+                {{selectedQuestion.questionId.options[0].answer}}
+
+              </button>
+              <button class="ans" mat-raised-button color="warn" [style.background-color]="selectedQuestion.questionId.options[1].answer==selectedQuestion.answer?'rgb(123, 192, 67)':''"
+                (click)="SelectAns($event);">{{selectedQuestion.questionId.options[1].answer}}</button>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <button class="ans" mat-raised-button color="warn" [style.background-color]="selectedQuestion.questionId.options[2].answer==selectedQuestion.answer?'rgb(123, 192, 67)':''"
+                (click)="SelectAns($event);">{{selectedQuestion.questionId.options[2].answer}}</button>
+              <button class="ans" mat-raised-button color="warn" [style.background-color]="selectedQuestion.questionId.options[3].answer==selectedQuestion.answer?'rgb(123, 192, 67)':''"
+                (click)="SelectAns($event);">{{selectedQuestion.questionId.options[3].answer}}</button>
+            </div>
+          </div>
+
+
+        </div>
+        <div *ngIf="selectedProblem">
+          <mat-card-header class="my-2 no-margin">
+            <mat-card class="mx-0" style="width: 100%">
+              <h3 style="text-align: center;">{{selectedProblem.problemId.title}}</h3>
+              <p class="text-center">{{selectedProblem.problemId.content}}</p>
+            </mat-card>
+          </mat-card-header>
+          <mat-card-content>
+
+
+
+            <mat-chip-list>
+              <div style="width: 100%" class="row text-center">
+                <div class="col-4">
+                  <mat-chip>
+                    Giới hạn thời gian:
+                    <strong> {{selectedProblem.problemId.timeLimit}}</strong>
+                  </mat-chip>
+                </div>
+                <div class="col-4">
+                  <mat-chip>Giới hạn bộ nhớ:
+                    <strong> {{selectedProblem.problemId.memoryLimit}}</strong>
+                  </mat-chip>
+                </div>
+                <div class="col-4">
+                  <mat-chip>Ngôn ngữ cho phép:
+                    <strong> {{selectedProblem.problemId.language}}</strong>
+                  </mat-chip>
+                </div>
+              </div>
+            </mat-chip-list>
+
+            <!-- <button mat-raised-button color="warn"
+                  (click)="onOpentSubmit()"
+                  >Submit code</button> -->
+            <!-- <div class="col-2  col-xl-1 text-right">
+                  <button class="upload-btn" mat-icon-button color=warn (click)="fileInput.click()">
+                    <mat-icon>cloud_upload</mat-icon>
+                  </button>
+                  <input hidden type="file" #fileInput (change)="handleFileInput($event.target.files)">
+                </div> -->
+
+
+            <div class="content mt-2">
+
+              <p class="">
+                <mat-icon>keyboard_tab</mat-icon>
+                <strong>Dữ liệu:</strong>{{selectedProblem.problemId.input}}</p>
+
+              <p>
+                <mat-icon>keyboard_return</mat-icon>
+                <strong>Kết quả:</strong>{{selectedProblem.problemId.output}}</p>
+              <div class="example">
+
+                <strong>Ví dụ:</strong>
+
+
+
+                <div class="table text-center">
+                  <table>
+                    <tr>
+                      <th class=" text-center" style="width: 50%;">Input</th>
+                      <th class=" text-center" style="width: 50%;">Output</th>
+                    </tr>
+                    <tr>
+                      <td style="width: 50%;" [innerHTML]="selectedProblem.problemId.example.input"></td>
+                      <td style="width: 50%;" [innerHTML]="selectedProblem.problemId.example.output"></td>
+                    </tr>
+                  </table>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="submit mt-2 text-center">
+              <button class="upload-btn" mat-stroked-button color=warn (click)="fileInput.click()">
+                <mat-icon>cloud_upload</mat-icon> Submit code
+              </button>
+              <input hidden type="file" #fileInput (change)="handleFileInput($event.target.files)">
+            </div>
+
+
+          </mat-card-content>
+          <mat-card-actions>
+
+          </mat-card-actions>
+        </div>
+      </mat-card>
+    </div>
+
+  </div>
+</div>
+
+

@@ -1,0 +1,69 @@
+<div class="example-container mat-elevation-z8">
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="position">
+        <th style="padding-left: 0 !important" class="thhead" mat-header-cell *matHeaderCellDef style="width: 70px"> STT </th>
+        <td style="padding-left: 0" class="tdh" mat-cell *matCellDef="let element;let i = index">{{i+1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 25%;"> Nội dung </th>
+        <td class="tdh" mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sortName">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 10%;"> Tên rút gọn </th>
+        <td class="tdh" mat-cell *matCellDef="let element"> {{element.sortName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="level">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 14%;"> Cấp độ </th>
+        <td class="tdh" mat-cell *matCellDef="let element"> {{element.level}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="language">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 14%;"> Ngôn ngữ </th>
+        <td class="tdh" mat-cell *matCellDef="let element"> {{element.language}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="correctScore">
+        <th class="thhead" mat-header-cell *matHeaderCellDef style="width: 14%;"> Điểm </th>
+        <td class="tdh" mat-cell *matCellDef="let element"> {{element.correctScore}} </td>
+      </ng-container>
+
+      <ng-container cdkColumnDef="action">
+        <th class="thhead" mat-header-cell *matHeaderCellDef>
+          Action
+        </th>
+        <td class="tdh" mat-cell *matCellDef="let element">
+          <button class="mx-1 action" mat-icon-button (click)="Update(element._id);">
+            <mat-icon style="color: #3b7dd8">edit</mat-icon>
+          </button>
+
+          <button class="mx-1 action" mat-icon-button (click)="Open(element._id,element.title,'delete');">
+            <mat-icon style="color: #ee4035 ">delete</mat-icon>
+          </button>
+        </td>
+
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr [style.background-color]="getRowStyle(element)" mat-row *matRowDef="let row; columns: displayedColumns;let element"></tr>
+    </table>
+  </div>
+  <div class="tool-box">
+    <div class="btn">
+      <button class="mx-1 action" mat-mini-fab style="background-color: #f37735" (click)='Add()'>
+        <mat-icon style="color: white">add</mat-icon>
+      </button>
+
+    </div>
+
+<!--
+    <mat-paginator style=" float: right;" [pageSize]='10' [pageSizeOptions]="[5, 10, 20]" [length]="data.total" [pageIndex]='0'
+      showFirstLastButtons></mat-paginator> -->
+      <mat-paginator [pageSize]='10' [pageSizeOptions]="[5, 10, 20]" [length]="data.total" [pageIndex]='0' (page)="GetIndexPage($event)"
+      showFirstLastButtons></mat-paginator>
+  </div>
+</div>
